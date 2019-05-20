@@ -8,6 +8,7 @@ use frontend\models\IndocSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * IndocController implements the CRUD actions for Indoc model.
@@ -37,7 +38,8 @@ class IndocController extends Controller
     {
         $searchModel = new IndocSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+        $dataProvider->sort->defaultOrder = ['date_ijro' => SORT_ASC];
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -66,7 +68,10 @@ class IndocController extends Controller
     {
         $model = new Indoc();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -82,18 +87,18 @@ class IndocController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+    //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    //         return $this->redirect(['view', 'id' => $model->id]);
+    //     }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('update', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Deletes an existing Indoc model.

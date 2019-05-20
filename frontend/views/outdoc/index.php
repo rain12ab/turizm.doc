@@ -1,42 +1,42 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\widgets\ListView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\OutdocSearch */
+/* @var $searchModel frontend\models\IndocSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Outdocs';
+$this->title = 'Javob (Chiqish) xatlar';
 $this->params['breadcrumbs'][] = $this->title;
+$i = 1;
 ?>
-<div class="outdoc-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h3 class="card-title"><?= $this->title;?></h3>
+            </div>
+            <div class="card-body">
+                <?php if(Yii::$app->user->identity->role == 1){
+                    echo '<p>'.Html::a('Javob (Chiqish) xatni qo\'shish', ['create'], ['class' => 'btn btn-success']).'</p>';
+                }?>
 
-    <p>
-        <?= Html::a('Create Outdoc', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <?php Pjax::begin(); ?>
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <?= ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'itemView' => '_view',
+                    'itemOptions' => ['tag' => null],
+                    'options' => ['class' => 'row', 'id' => ''],
+                    'summary' => '',
+                ]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'file',
-            'date',
-            'get_doc_id',
-            'user_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+                <?php Pjax::end(); ?>
+            </div>
+        </div>
+    </div>
 </div>

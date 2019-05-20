@@ -3,12 +3,8 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap4\Accordion;
-use common\models\User;
-use Faker\Provider\DateTime;
 
-$ijrochilar = User::find()->where(['id' => $model->ijrochilar])->all();
-
-$date_ijro = strtotime($model->date_ijro);
+$date_ijro = strtotime($model->indoc->date_ijro);
 
 $rem = $date_ijro - date('U');
 
@@ -43,7 +39,7 @@ else
     <div class="card-header" id="headingOne">
       <h1 class="mb-0">
         <button class="btn btn-link card-title" data-toggle="collapse" data-target="#<?= $model->id;?>" aria-expanded="true" aria-controls="<?= $model->id;?>">
-          <?= 'Kirish xati № '.$model->our_number;?> | <?= 'Xatning indeksi № '.$model->guest_number;?> | Asosiy ijrochi: <?= $model->username->full_name;?> | Muddati: <?= $model->date_ijro;?>
+          <?= 'Kirish xati № '.$model->indoc->our_number;?> | <?= 'Xatning indeksi № '.$model->indoc->guest_number;?> | Ijrochi: <?= $model->username->full_name;?> | Muddati: <?= $model->indoc->date_ijro;?>
         </button>
       </h1>
     </div>
@@ -62,13 +58,6 @@ else
                 </a>
               </div>
             <?php endfor;?>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <p>Ijrochilar: <?php foreach ($ijrochilar as $ij) {
-              echo $ij->full_name.'; ';
-            }?></p>
-          </div>
         </div>
       </div>
     </div>

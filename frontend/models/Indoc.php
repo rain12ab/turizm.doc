@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use common\models\User;
 
 /**
  * This is the model class for table "Indoc".
@@ -47,7 +48,7 @@ class Indoc extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'our_number' => 'Hujjar raqami',
+            'our_number' => 'Hujjat raqami',
             'guest_number' => 'Hujjat indeksi',
             'file' => 'Files',
             'date_ijro' => 'Ijro muddati',
@@ -56,5 +57,9 @@ class Indoc extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Kiritilish vaqti',
         ];
+    }
+
+    public function getUsername() {
+        return $this->hasOne(User::className(), ['id' => 'main_ijro']);
     }
 }

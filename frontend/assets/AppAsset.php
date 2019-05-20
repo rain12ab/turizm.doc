@@ -27,7 +27,7 @@ class AppAsset extends AssetBundle
         'js/plugins/bootstrap-datetimepicker.min.js',
         'js/plugins/jquery.dataTables.min.js',
         'js/plugins/bootstrap-tagsinput.js',
-        'js/plugins/jasny-bootstrap.min.js',
+        // 'js/plugins/jasny-bootstrap.min.js',
         'js/plugins/fullcalendar.min.js',
         'js/plugins/jquery-jvectormap.js',
         'js/plugins/nouislider.min.js',

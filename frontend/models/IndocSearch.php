@@ -40,8 +40,16 @@ class IndocSearch extends Indoc
      * @return ActiveDataProvider
      */
     public function search($params)
-    {
-        $query = Indoc::find()->where(['main_ijro' => Yii::$app->user->identity->id]);
+    {   
+        if(Yii::$app->user->identity->role == 1)
+            {
+                $query = Indoc::find()->where(['main_ijro' => Yii::$app->user->identity->id]);
+            }
+        else
+            {
+                $query = Indoc::find();
+            }
+        
 
         // add conditions that should always apply here
 
